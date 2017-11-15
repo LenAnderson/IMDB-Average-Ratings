@@ -74,7 +74,7 @@
                         data: movies.map(movie=>{return {x:movie.year, y:movie.rating, title:movie.title};})
                     },
                     {
-                        label: 'Average Score',
+                        label: 'Average Rating',
                         fill: false,
                         showLine: true,
                         pointRadius: 0,
