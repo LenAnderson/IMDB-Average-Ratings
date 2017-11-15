@@ -1,6 +1,8 @@
 # IMDB-Average-Ratings
 Rating overview for actors
 
+![IMDB Averate Ratings](https://i.imgur.com/i2pgC3P.png)
+
 ## Installation
 You need to install this using tampermonkey or greasemonkey.
 Chrome: [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en)
