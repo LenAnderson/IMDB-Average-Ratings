@@ -31,9 +31,9 @@
     spinner.style.backgroundPosition = 'center';
     spinner.style.height = '20px';
     spinner.title = 'Loading ratings...';
-    $('#filmo-head-actress').appendChild(spinner);
+    $('#filmo-head-actress, #filmo-head-actor').appendChild(spinner);
 
-    Promise.all([].filter.call($$('#filmo-head-actress + .filmo-category-section > .filmo-row'), row => {
+    Promise.all([].filter.call($$('#filmo-head-actress + .filmo-category-section > .filmo-row, #filmo-head-actor + .filmo-category-section > .filmo-row'), row => {
         return row.querySelector('.in_production') == null;
     }).map(row => {
         return get(row.querySelector('a').href).then(responseText=>{
@@ -58,7 +58,7 @@
         canvas.style.display = 'block';
         canvas.style.width = '600px';
         spinner.remove();
-        $('#filmo-head-actress').appendChild(canvas);
+        $('#filmo-head-actress, #filmo-head-actor').appendChild(canvas);
         let context = canvas.getContext('2d');
         let chart = new Chart(context, {
             type: 'scatter',
