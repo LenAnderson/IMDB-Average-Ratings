@@ -88,7 +88,7 @@
             options: {
                 tooltips:{
                     callbacks: {
-                        label:tooltipItem => movies[tooltipItem.index].title
+                        label:tooltipItem => movies[tooltipItem.index].title + ' (' + movies[tooltipItem.index].rating + ')'
                     }
                 },
                 scales: {
