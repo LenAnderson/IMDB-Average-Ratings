@@ -62,7 +62,7 @@
         $('#filmo-head-actress, #filmo-head-actor').appendChild(canvas);
 
         // generates average line data and label
-        var averageArray = Array.from(new Set(movies.map(movie=>movie.year))).map(year=>{return {x:year, y:movies.filter(movie=>movie.year==year).reduce((sum,cur)=>sum+cur.rating,0)/movies.filter(movie=>movie.year==year).length};})
+        let averageArray = Array.from(new Set(movies.map(movie=>movie.year))).map(year=>{return {x:year, y:movies.filter(movie=>movie.year==year).reduce((sum,cur)=>sum+cur.rating,0)/movies.filter(movie=>movie.year==year).length};})
 
         let ratingSum = 0;
         let ratingsFound = 0;
