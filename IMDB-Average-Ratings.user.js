@@ -6,6 +6,7 @@
 // @author       LenAnderson
 // @match        http://www.imdb.com/name/*
 // @match        https://www.imdb.com/name/*
+// @run-at       document-body
 // @grant        none
 // @require      https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js
 // ==/UserScript==
