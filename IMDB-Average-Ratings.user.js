@@ -5,6 +5,7 @@
 // @version      0.1
 // @author       LenAnderson
 // @match        http://www.imdb.com/name/*
+// @match        https://www.imdb.com/name/*
 // @grant        none
 // @require      https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js
 // ==/UserScript==
