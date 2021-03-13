@@ -7,7 +7,7 @@
 // @match        http://www.imdb.com/name/*
 // @match        https://www.imdb.com/name/*
 // @grant        none
-// @require      https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js
+// @require      https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js
 // ==/UserScript==
 
 (function() {
@@ -60,6 +60,23 @@
         canvas.style.width = '600px';
         spinner.remove();
         $('#filmo-head-actress, #filmo-head-actor').appendChild(canvas);
+
+        // generates average line data and label
+        var averageArray = Array.from(new Set(movies.map(movie=>movie.year))).map(year=>{return {x:year, y:movies.filter(movie=>movie.year==year).reduce((sum,cur)=>sum+cur.rating,0)/movies.filter(movie=>movie.year==year).length};})
+
+        let ratingSum = 0;
+        let ratingsFound = 0;
+        const ratingLen = averageArray.length;
+        let ratingAvg = null;
+        for (let i = 0; i < ratingLen; i++) {
+            ratingAvg = averageArray[i];
+                ratingSum = ratingAvg.y + ratingSum;
+                ratingsFound = ratingsFound + 1;
+        }
+        const averageRating = Math.round((ratingSum / ratingsFound) * 10) / 10
+        let averageLabel = "Average rating (" + averageRating + ")";
+
+        // generates chart
         let context = canvas.getContext('2d');
         let chart = new Chart(context, {
             type: 'scatter',
@@ -75,14 +92,14 @@
                         data: movies.map(movie=>{return {x:movie.year, y:movie.rating, title:movie.title};})
                     },
                     {
-                        label: 'Average Rating',
+                        label: averageLabel,
                         fill: false,
                         showLine: true,
                         pointRadius: 0,
                         backgroundColor: 'rgba(0,0,0,0)',
                         borderColor: 'rgba(0,0,255,0.8)',
                         fillColor: 'rgba(0,0,0,0)',
-                        data: Array.from(new Set(movies.map(movie=>movie.year))).map(year=>{return {x:year, y:movies.filter(movie=>movie.year==year).reduce((sum,cur)=>sum+cur.rating,0)/movies.filter(movie=>movie.year==year).length};})
+                        data: averageArray
                     }
                 ]
             },
