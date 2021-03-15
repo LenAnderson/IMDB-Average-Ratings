@@ -62,20 +62,23 @@
         spinner.remove();
         $('#filmo-head-actress, #filmo-head-actor').appendChild(canvas);
 
-        // generates average line data and label
-        let averageArray = Array.from(new Set(movies.map(movie=>movie.year))).map(year=>{return {x:year, y:movies.filter(movie=>movie.year==year).reduce((sum,cur)=>sum+cur.rating,0)/movies.filter(movie=>movie.year==year).length};})
+        let years = Array.from(new Set(movies.map(movie=>movie.year)));
 
-        let ratingSum = 0;
-        let ratingsFound = 0;
-        const ratingLen = averageArray.length;
-        let ratingAvg = null;
-        for (let i = 0; i < ratingLen; i++) {
-            ratingAvg = averageArray[i];
-                ratingSum = ratingAvg.y + ratingSum;
-                ratingsFound = ratingsFound + 1;
-        }
-        const averageRating = Math.round((ratingSum / ratingsFound) * 10) / 10
-        let averageLabel = "Average rating (" + averageRating + ")";
+        // calculate overall average rating
+        let avgSum = 0;
+        let avgCnt = 0;
+        let overallAverageData = years.map(year=>{
+            let movs = movies.filter(it=>it.year==year);
+            avgSum += movs.reduce((val,cur)=>val+cur.rating,0);
+            avgCnt += movs.length;
+            let d = {
+                x: year,
+                y: Math.round(avgSum/avgCnt*10)/10,
+                title: year
+            };
+            console.log(d);
+            return d;
+        });
 
         // generates chart
         let context = canvas.getContext('2d');
@@ -93,14 +96,38 @@
                         data: movies.map(movie=>{return {x:movie.year, y:movie.rating, title:movie.title};})
                     },
                     {
-                        label: averageLabel,
+                        label: 'Yearly Average',
                         fill: false,
                         showLine: true,
                         pointRadius: 0,
                         backgroundColor: 'rgba(0,0,0,0)',
                         borderColor: 'rgba(0,0,255,0.8)',
                         fillColor: 'rgba(0,0,0,0)',
-                        data: averageArray
+                        data: years.map(year=>{return {x: year, y: movies.filter(movie=>movie.year==year).reduce((sum,cur)=>sum+cur.rating,0)/movies.filter(movie=>movie.year==year).length};})
+                    },
+                    {
+                        label: 'Overall Average (' + overallAverageData.slice(-1)[0].y + ')',
+                        type: 'line',
+                        fill: true,
+                        showLine: true,
+                        pointRadius: 0,
+                        lineTension: 0,
+                        backgroundColor: 'rgba(239, 227, 164, 0.5)',
+                        borderColor: 'transparent',
+                        pointBackgroundColor: 'yellow',
+                        fillColor: 'red',
+                        data: years.map(year=>{
+                            let movs = movies.filter(it=>it.year==year);
+                            avgSum += movs.reduce((val,cur)=>val+cur.rating,0);
+                            avgCnt += movs.length;
+                            let d = {
+                                x: year,
+                                y: avgSum/avgCnt,
+                                title: year
+                            };
+                            console.log(d);
+                            return d;
+                        })
                     }
                 ]
             },
