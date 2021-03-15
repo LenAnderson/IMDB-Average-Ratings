@@ -116,18 +116,7 @@
                         borderColor: 'transparent',
                         pointBackgroundColor: 'yellow',
                         fillColor: 'red',
-                        data: years.map(year=>{
-                            let movs = movies.filter(it=>it.year==year);
-                            avgSum += movs.reduce((val,cur)=>val+cur.rating,0);
-                            avgCnt += movs.length;
-                            let d = {
-                                x: year,
-                                y: avgSum/avgCnt,
-                                title: year
-                            };
-                            console.log(d);
-                            return d;
-                        })
+                        data: overallAverageData
                     }
                 ]
             },
