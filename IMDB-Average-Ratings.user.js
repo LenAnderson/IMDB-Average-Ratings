@@ -76,7 +76,6 @@
                 y: Math.round(avgSum/avgCnt*10)/10,
                 title: year
             };
-            console.log(d);
             return d;
         });
 
