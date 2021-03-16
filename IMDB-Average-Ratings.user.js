@@ -2,7 +2,7 @@
 // @name         IMDB - Average Ratings
 // @namespace    https://github.com/LenAnderson/
 // @downloadURL  https://github.com/LenAnderson/IMDB-Average-Ratings/raw/master/IMDB-Average-Ratings.user.js
-// @version      0.1
+// @version      0.2
 // @author       LenAnderson
 // @match        http://www.imdb.com/name/*
 // @match        https://www.imdb.com/name/*
